@@ -49,7 +49,7 @@ describe("Button component", () => {
 
   it("is disabled when the disabled prop is set", () => {
     render(<Button disabled>Can`t click me</Button>);
-    const button = screen.getByText("Cant click me");
+    const button = screen.getByText("Can`t click me");
     expect(button).toBeDisabled();
   });
 });
