@@ -20,7 +20,7 @@
   "*.{ts,tsx}": [
     "pnpm format",
     "pnpm lint",
-    "pnpm test"
+    "pnpm jest --bail --findRelatedTests"
   ]
 },
   "dependencies": {
