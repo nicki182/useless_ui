@@ -15,9 +15,12 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: "@{USER_NAME}"
-      - run: npm install
-      - run: npm run test
-      - run: npm run build
-      - run: npm publish
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install  
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
