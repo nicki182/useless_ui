@@ -17,19 +17,16 @@ describe("Tooltip", () => {
     await waitFor(() => expect(screen.getAllByText("Text")).not.toBeNull());
   });
 
-  //   it("hides the tooltip content when not hovered", async () => {
-  //     render(<Tooltip label="Hover me" content="Text" />);
-  //     const trigger = screen.getByText("Hover me");
-  //     await act(async () => {
-  //       await userEvent.hover(trigger); // Simulate hover
-  //     });
-  //     expect(await screen.getAllByText("Text")).toBeInTheDocument();
-  //     await act(async () => {
-  //       const hovering = setTimeout(() => {
-  //         userEvent.hover(trigger); // Simulate hover
-  //       }, 1000);
-  //       clearTimeout(hovering);
-  //     });
-  //     expect(screen.queryAllByText("Text")).not.toBeInTheDocument();
-  //   });
+  it("hides the tooltip content when not hovered", async () => {
+    render(<Tooltip label="Hover me" content="Text" />);
+    const trigger = screen.getByText("Hover me");
+    await act(async () => {
+      await userEvent.hover(trigger); // Simulate hover
+    });
+    waitFor(() => expect(screen.getAllByText("Text")).not.toBeNull());
+    await act(async () => {
+      await userEvent.unhover(trigger); // Simulate unhover
+    });
+    waitFor(() => expect(screen.queryAllByText("Text")).toBeNull());
+  });
 });
