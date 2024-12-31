@@ -1,33 +1,32 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 
-import { Accordion } from "./accordion";
+import { Tooltip } from "./tooltip";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Components/Accordion",
-  component: Accordion,
+  title: "Components/Tooltip",
+  component: Tooltip,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
-} satisfies Meta<typeof Accordion>;
+} satisfies Meta<typeof Tooltip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Default: Story = {
+export const TextTooltip: Story = {
   args: {
-    type: "multiple",
-    options: [
-      { label: "Option 1", content: "Content 1", value: "1" },
-      { label: "Option 2", content: "Content 2", value: "2" },
-      { label: "Option 3", content: "Content 3", value: "3" },
-    ],
+    content: "Tooltip",
+    label: "Button",
+  },
+};
+export const ComponentTooltip: Story = {
+  args: {
+    content: <div>Tooltip</div>,
+    label: <button>Button</button>,
   },
 };
