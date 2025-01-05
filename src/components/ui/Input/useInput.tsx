@@ -24,17 +24,6 @@ const useInput = (
     setValue(initialValue);
   }, [initialValue]);
   React.useEffect(() => {
-    console.log(
-      "value",
-      value,
-      "changedValue",
-      changedValue,
-      "initialValue",
-      initialValue,
-      "onChange",
-      onChange,
-      changedValue !== value && value,
-    );
     if (changedValue.length !== ((value || "") as string).length && value) {
       const newValue = changeValue(value as string);
       setChangedValue(newValue as string);
