@@ -13,7 +13,7 @@ import {
 } from "react-hook-form";
 
 import { cn } from "@useless/lib/utils";
-import { Label } from "@useless/components/ui/label";
+import { Label } from "@useless/components/ui/Label/label";
 
 const Form = FormProvider;
 
