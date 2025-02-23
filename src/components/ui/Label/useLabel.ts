@@ -1,39 +1,23 @@
 import React from "react";
-const useLabel = (children: React.ReactNode) => {
-  const changeLabel = (s: string): string => {
-    const arrayString = s.split("");
-    let newString = "";
-    for (let i = arrayString.length - 1; i >= 0; i--) {
-      const char = arrayString[i];
-      newString += char;
+
+const useLabel = (children: React.ReactNode): React.ReactNode => {
+  const reverseText = (s: string): string => s.split("").reverse().join("");
+
+  const transformChildren = (node: React.ReactNode): React.ReactNode => {
+    if (typeof node === "string") return reverseText(node);
+
+    if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
+      return React.cloneElement(
+        node,
+        { ...node.props }, // Preserve existing props
+        React.Children.map(node.props.children, transformChildren), // Recursively transform children
+      );
     }
-    return newString;
+
+    return node;
   };
-  const getChildren = (children: React.ReactNode): React.ReactNode => {
-    if (typeof children === "string") return changeLabel(children);
-    if (React.isValidElement(children)) {
-      return React.Children.map(children, (child) => {
-        if (typeof child === "string") {
-          return changeLabel(child);
-        }
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            children: React.Children.map(
-              child?.props?.children || [],
-              (nestedChild) => {
-                if (typeof nestedChild === "string") {
-                  return changeLabel(nestedChild);
-                }
-                return nestedChild;
-              },
-            ),
-          });
-        }
-        return child;
-      });
-    }
-    return children;
-  };
-  return getChildren(children);
+
+  return transformChildren(children);
 };
+
 export default useLabel;
